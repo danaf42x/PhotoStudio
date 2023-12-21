@@ -15,14 +15,15 @@
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel Margin="16 16 16 16">
+                    <Button Command="{Binding SaveCommand}" Margin="0 0 0 8">Save Changes</Button>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
                         <Button Command="{Binding StatisticsCommand}">Get Statistics</Button>
                         <ComboBox ItemsSource="{Binding Months}"
+                                  Grid.Column="1"
                                   SelectedItem="{Binding MonthSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Button Command="{Binding SignOutCommand}"
@@ -43,8 +44,84 @@
             </TabControl>
         </TabItem>
         <TabItem Header="Photographers">
-            <DataGrid ItemsSource="{Binding ListPhotographers}"
-                      CanUserAddRows="False"/>
+            <StackPanel>
+                <ListBox Margin="16"
+                 ItemsSource="{Binding ListPhotographers}"
+                         SelectedItem="{Binding PhotographerSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="8 0 0 0"/>
+                                        <TextBox Text="{Binding Patronym, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="8 0 16 0"/>
+                                        <TextBox Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="8 0 0 0"/>
+                                        <TextBox Text="{Binding Passport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+
+                                    <ListBox ItemsSource="{Binding Schedule}"
+                                             Margin="16 4 0 0">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Padding" Value="0"/>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0">
+                                                    <Rectangle Fill="{Binding Background}" 
+                                                       Width="12" 
+                                                       Height="16"
+                                                       Margin="0"/>
+                                                    <TextBlock Text="{Binding Hour}"
+                                                       Foreground="White"
+                                                       FontSize="8"
+                                                       FontWeight="Bold"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Margin="-54"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
+                                    <TextBox Text="{Binding DayStartHour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox Text="{Binding DayEndHour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+
+                                <Image Source="{Binding ImageSource}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Command="{Binding AddCommand}"
+                            CommandParameter="photographer">Добавить фотографа</Button>
+                    <Button Command="{Binding RemoveCommand}"
+                            Grid.Column="1"
+                            CommandParameter="photographer">Удалить фотографа</Button>
+                </Grid>
+            </StackPanel>
         </TabItem>
         <TabItem Header="Users">
             <DataGrid ItemsSource="{Binding ListUsers}"

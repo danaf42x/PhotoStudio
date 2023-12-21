@@ -62,6 +62,7 @@ namespace PhotoStudio.BLL.ViewModels
                 if (logged_in != null)
                 {
                     this.CurrentViewModel = new HomeViewModel(this);
+                    _loggedInAs = logged_in;
                 }
             }
         }

@@ -28,7 +28,7 @@ namespace PhotoStudio.DAL.RepositoriesMongo
             repositoryUsers = new UserRepositoryMongo(db);
         }
 
-        public IRepository<Order> Orders => repositoryOrders;
+        public IRepositoryOrder Orders => repositoryOrders;
 
         public IRepository<Person> Persons => repositoryPersons;
 

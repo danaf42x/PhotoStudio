@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,12 @@ namespace PhotoStudio.DAL.Models
         public string Passport { get; set; }
         public int DayStartHour { get; set; }
         public int DayEndHour { get; set; }
-        public DateTime VacationUntil { get; set; }
+        public DateTime VacationUntil { get; set; } = DateTime.Now;
+
+        public override string ToString()
+        {
+            return Surname + " " + Name + " " + Patronym;
+        }
 
         [NotMapped]
         private ImageSource _imgsrc;
@@ -34,7 +40,14 @@ namespace PhotoStudio.DAL.Models
                 if (_imgsrc == null)
                 {
                     var converter = new ImageSourceConverter();
-                    _imgsrc = (ImageSource)converter.ConvertFromString("pack://application:,,,/PL/Images/Employees/" + PhoneNumber + ".jpg");
+                    if (File.Exists("pack://application:,,,/PL/Images/Employees/" + PhoneNumber + ".jpg"))
+                    {
+                        _imgsrc = (ImageSource)converter.ConvertFromString("pack://application:,,,/PL/Images/Employees/" + PhoneNumber + ".jpg");
+                    }
+                    else
+                    {
+                        _imgsrc = (ImageSource)converter.ConvertFromString("pack://application:,,,/PL/Images/Employees/Default.jpg");
+                    }
                 }
                 return _imgsrc;
             }
@@ -55,7 +68,7 @@ namespace PhotoStudio.DAL.Models
                     {
                         s[i] = new ScheduleHour()
                         {
-                            IsAvailable = (DayEndHour > DayStartHour ? (i >= DayStartHour && i <= DayEndHour) : !(i >= DayEndHour && i <= DayStartHour)),
+                            IsAvailable = (VacationUntil==null || DateTime.Compare(DateTime.Now,VacationUntil)>0) && (DayEndHour > DayStartHour ? (i >= DayStartHour && i <= DayEndHour) : !(i >= DayEndHour && i <= DayStartHour)),
                             Hour = i
                         };
                     }

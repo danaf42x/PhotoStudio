@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using PhotoStudio.DAL.Interfaces;
 using PhotoStudio.DAL.Models;
+using PhotoStudio.DAL.Other;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhotoStudio.DAL.RepositoriesMongo
 {
-    public class OrderRepositoryMongo : IRepository<Order>
+    public class OrderRepositoryMongo : IRepositoryOrder
     {
         private PhotoStudioMongoContext db;
 
@@ -36,6 +37,11 @@ namespace PhotoStudio.DAL.RepositoriesMongo
         }
 
         public Order GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Statistic GetMonthStatistics(int month)
         {
             throw new NotImplementedException();
         }

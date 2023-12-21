@@ -27,8 +27,14 @@ namespace PhotoStudio.BLL.ViewModels.Pages
         });
         public string MonthSelected { get; set; }
 
+        public Photographer PhotographerSelected { get; set; }
+
         public ICommand SignOutCommand { get; }
         public ICommand StatisticsCommand { get; }
+        public ICommand SaveCommand { get; }
+
+        public ICommand AddCommand { get; }
+        public ICommand RemoveCommand { get; }
 
         public AdminViewModel(MainViewModel p)
         {
@@ -43,6 +49,39 @@ namespace PhotoStudio.BLL.ViewModels.Pages
             o => {
                 p.CurrentViewModel = new LoginViewModel(p);
                 p.LogOut();
+            });
+
+            SaveCommand = new ViewModelCommand(
+            o => {
+                p.db.Save();
+            });
+
+            AddCommand = new ViewModelCommand(
+            o => {
+                var arg = (string)o;
+                if (arg == "photographer")
+                {
+                    var ph = new Photographer();
+                    ListPhotographers.Add(ph);
+                    p.db.Photographers.Create(ph);
+                }
+            });
+
+            RemoveCommand = new ViewModelCommand(
+            o => {
+                var arg = (string)o;
+                if (arg == "photographer")
+                {
+                    p.db.Photographers.Delete(PhotographerSelected);
+                    ListPhotographers.Remove(PhotographerSelected);
+                }
+            }, o => {
+                var arg = (string)o;
+                if (arg == "photographer")
+                {
+                    return PhotographerSelected != null;
+                }
+                return false;
             });
 
             StatisticsCommand = new ViewModelCommand(
@@ -63,9 +102,15 @@ namespace PhotoStudio.BLL.ViewModels.Pages
                         of.WriteLine(" \t | Completed:\t" + (st.successful).ToString("N0"));
                         of.WriteLine(" \t | Failed:\t" + (st.failed).ToString("N0"));
                         of.WriteLine("\n--- Photographer statistics --- ");
+
+                        foreach (Photographer ph in st.totalmade_photographers.Keys)
+                        {
+                            of.WriteLine(ph.Surname + " " + ph.Name + " " + ph.Patronym);
+                            of.WriteLine("| Earned: " + st.totalmade_photographers[ph].ToString("N0") + " from " + st.successful_photographers[ph].ToString("N0") + " orders;");
+                        }
                     }
                 }
-            }, o => MonthSelected.Length>0);
+            }, o => MonthSelected!=null && MonthSelected.Length>0);
         }
     }
 }

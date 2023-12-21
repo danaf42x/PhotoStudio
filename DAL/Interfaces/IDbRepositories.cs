@@ -9,7 +9,7 @@ namespace PhotoStudio.DAL.Interfaces
 {
     public interface IDbRepositories
     {
-        IRepository<Order> Orders { get; }
+        IRepositoryOrder Orders { get; }
         IRepository<Person> Persons { get; }
         IRepository<Photographer> Photographers { get; }
         IRepositoryUser Users { get; }

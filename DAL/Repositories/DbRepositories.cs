@@ -22,7 +22,7 @@ namespace PhotoStudio.DAL.Repositories
             db = new PhotoStudioContext();
         }
 
-        public IRepository<Order> Orders
+        public IRepositoryOrder Orders
         {
             get
             {

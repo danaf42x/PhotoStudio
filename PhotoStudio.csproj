@@ -208,6 +208,7 @@
     <Compile Include="BLL\ViewModels\Pages\Sub\PhotographersViewModel.cs" />
     <Compile Include="BLL\ViewModels\Pages\Sub\ProfileViewModel.cs" />
     <Compile Include="DAL\Interfaces\IDbRepositories.cs" />
+    <Compile Include="DAL\Interfaces\IRepositoryOrder.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Interfaces\IRepositoryUser.cs" />
     <Compile Include="DAL\Models\Order.cs" />
@@ -321,6 +322,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>PhotoStudioDB.mdf</DependentUpon>
     </Content>
+    <Resource Include="PL\Images\Employees\Default.jpg" />
     <Resource Include="PL\Images\timetable.png" />
     <Resource Include="PL\Images\Employees\81337842525.jpg" />
     <Resource Include="PL\Images\Employees\82280541984.jpg" />

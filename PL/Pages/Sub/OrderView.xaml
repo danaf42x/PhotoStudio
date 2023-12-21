@@ -11,10 +11,48 @@
                    FontWeight="Bold"
                    FontSize="32">Make an order!</TextBlock>
         <StackPanel Margin="128 8 128 8">
-            <TextBlock>Date</TextBlock>
-            <DatePicker DisplayDateStart="{Binding DisplayDateStart}" DisplayDateEnd="{Binding DisplayDateEnd}"/>
+            <TextBlock>1. Select a date</TextBlock>
+            <DatePicker DisplayDateStart="{Binding DisplayDateStart}" 
+                        DisplayDateEnd="{Binding DisplayDateEnd}" 
+                        SelectedDate="{Binding DateSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock>2. Select time</TextBlock>
 
-            <TextBlock>Date</TextBlock>
+            <ListBox ItemsSource="{Binding Times}"
+                     Margin="16 4 0 0">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0">
+                            <Button Content="{Binding Hour}"
+                                    Command="{Binding RelativeSource={
+                                RelativeSource AncestorType=ListBox},
+                                Path=DataContext.HourCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsEnabled="{Binding IsAvailable}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock>3. Select a photographer</TextBlock>
+            <ComboBox ItemsSource="{Binding ListHour}"
+                      SelectedItem="{Binding SelectedPhotographer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Margin="32"
+                    Command="{Binding HireCommand}">
+                Make an order!
+            </Button>
+
+            <TextBlock>This will be 350 roubles.</TextBlock>
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -14,7 +14,7 @@ namespace PhotoStudio.Ninject
     {
         public override void Load()
         {
-            Bind<IRepository<Order>>().To<OrderRepository>();
+            Bind<IRepositoryOrder>().To<OrderRepository>();
             Bind<IRepository<Person>>().To<PersonRepository>();
             Bind<IRepository<Photographer>>().To<PhotographerRepository>();
             Bind<IRepositoryUser>().To<UserRepository>();

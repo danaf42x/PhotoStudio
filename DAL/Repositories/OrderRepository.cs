@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PhotoStudio.DAL.Repositories
 {
-    public class OrderRepository : IRepository<Order>
+    public class OrderRepository : IRepositoryOrder
     {
         private PhotoStudioContext db;
 
