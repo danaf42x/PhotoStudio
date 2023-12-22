@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PhotoStudio.PL.Pages.Sub"
+             xmlns:local="clr-namespace:PhotoStudio.PL.Pages.Sub" 
+             xmlns:sub="clr-namespace:PhotoStudio.BLL.ViewModels.Pages.Sub" d:DataContext="{d:DesignInstance Type=sub:ProfileViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Margin="8 16 8 8">
+        <TextBlock FontSize="24">Logged in as</TextBlock>
+        <TextBlock Text="{Binding MyUser.Username}"/>
+        <ListBox ItemsSource="{Binding MyPendingOrders}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Order.Photographer}"
+                                   FontWeight="Bold"
+                                   FontSize="15"/>
+
+                            <StackPanel>
+                                <TextBlock Text="{Binding Order.Start}"
+                                   FontWeight="Light"
+                                   FontSize="12"
+                                       Margin="8 0 0 0"
+                                           Foreground="{Binding TextColor}"/>
+                                <TextBlock Text="{Binding Order.End}"
+                                   FontWeight="Light"
+                                   FontSize="12"
+                                       Margin="8 0 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Text}"
+                                       Foreground="{Binding TextColor}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
 </UserControl>

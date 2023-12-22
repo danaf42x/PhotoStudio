@@ -54,9 +54,17 @@ namespace PhotoStudio.DAL.Repositories
 
             Statistic stat = new Statistic();
 
-            foreach (Order o in db.Orders.Where(o => o.End.Month == month))
+            foreach (Order o in db.Orders.Where(o => o.End.Month == month+1 && DateTime.Compare(o.End, DateTime.Now)<=0))
             {
                 stat.totalmade += o.Paid;
+
+                if (!stat.totalmade_photographers.ContainsKey(o.Photographer))
+                {
+                    stat.totalmade_photographers[o.Photographer] = 0;
+                    stat.successful_photographers[o.Photographer] = 0;
+                    stat.failed_photographers[o.Photographer] = 0;
+                }
+
                 stat.totalmade_photographers[o.Photographer] += o.Paid;
 
                 if (o.Paid > 0)

@@ -10,7 +10,7 @@
         <TextBlock TextAlignment="Center"
                    FontWeight="Bold"
                    FontSize="32">Make an order!</TextBlock>
-        <StackPanel Margin="128 8 128 8">
+        <StackPanel Margin="48 8 48 8">
             <TextBlock>1. Select a date</TextBlock>
             <DatePicker DisplayDateStart="{Binding DisplayDateStart}" 
                         DisplayDateEnd="{Binding DisplayDateEnd}" 

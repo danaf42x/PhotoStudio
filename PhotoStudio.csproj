@@ -215,6 +215,7 @@
     <Compile Include="DAL\Models\Person.cs" />
     <Compile Include="DAL\Models\Photographer.cs" />
     <Compile Include="DAL\Models\User.cs" />
+    <Compile Include="DAL\Other\PendingOrder.cs" />
     <Compile Include="DAL\Other\ScheduleHour.cs" />
     <Compile Include="DAL\Other\Statistic.cs" />
     <Compile Include="DAL\RepositoriesMongo\DbRepositoriesMongo.cs" />
