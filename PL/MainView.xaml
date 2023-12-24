@@ -8,7 +8,10 @@
         xmlns:viewmodels="clr-namespace:PhotoStudio.BLL.ViewModels"
         xmlns:viewmodelsPages="clr-namespace:PhotoStudio.BLL.ViewModels.Pages"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown"
+        Title="Фотостудия 18-54" Height="440" Width="700">
     
     <Window.DataContext>
         <viewmodels:MainViewModel/>
@@ -32,11 +35,47 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Grid>
-        <Grid x:Name="ShowContent"
-              Margin="16 16 16 16">
-            <ContentControl Content="{Binding CurrentViewModel}" />
-        </Grid>
-    </Grid>
+    <Border Grid.Row="1"
+            Background="#1f1e21">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="24"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="#44a2c2" Opacity=".43"/>
+                <TextBlock FontWeight="Bold" 
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="8 0 0 0">Фотостудия "18-54"</TextBlock>
+                <Button Grid.Column="1"
+                        x:Name="btnMinimize"
+                        Background="White"
+                        Foreground="Black"
+                        FontWeight="Black"
+                        FontSize="14"
+                        Click="btnMinimize_Click">
+                    -
+                </Button>
+                <Button x:Name="btnClose"
+                        Grid.Column="2"
+                        Background="PaleVioletRed"
+                        Foreground="White"
+                        FontWeight="Black"
+                        FontSize="14"
+                        Click="btnClose_Click">
+                    x
+                </Button>
+            </Grid>
+
+            <ContentControl Content="{Binding CurrentViewModel}"
+                            Grid.Row="1"/>
+        </Grid>
+    </Border>
 </Window>

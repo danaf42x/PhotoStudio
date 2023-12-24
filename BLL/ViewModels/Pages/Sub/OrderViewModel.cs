@@ -20,6 +20,9 @@ namespace PhotoStudio.BLL.ViewModels.Pages.Sub
         public DateTime DisplayDateStart { get; set; }
         public DateTime DisplayDateEnd { get; set; }
 
+        private System.Windows.Visibility _vis = System.Windows.Visibility.Hidden;
+        public System.Windows.Visibility IsPriceVisible { get => _vis; set { OnPropertyChanged("IsPriceVisible"); _vis = value; } }
+
         private DateTime _dateselected = DateTime.Today;
         public DateTime DateSelected
         {
@@ -43,7 +46,7 @@ namespace PhotoStudio.BLL.ViewModels.Pages.Sub
         private List<Photographer> available;
         private Dictionary<Photographer, bool[]> calced;
         public ObservableCollection<Photographer> ListHour { get; }
-        private int selectedhour;
+        private int selectedhour=-1;
         public Photographer SelectedPhotographer { get; set;  }
 
         public OrderViewModel(MainViewModel p, User user, BaseViewModel pp)
@@ -64,11 +67,13 @@ namespace PhotoStudio.BLL.ViewModels.Pages.Sub
                 int hour = ((ScheduleHour)o).Hour;
                 selectedhour = hour;
                 ListHour.Clear();
+                IsPriceVisible = System.Windows.Visibility.Hidden;
                 foreach (var ph in calced.Keys)
                 {
                     if (calced[ph][hour])
                     {
                         ListHour.Add(ph);
+                        IsPriceVisible = System.Windows.Visibility.Visible;
                     }
                 }
             });
@@ -109,7 +114,7 @@ namespace PhotoStudio.BLL.ViewModels.Pages.Sub
                 dic[ph] = new bool[24];
                 for (int i = 0; i < 24; i++)
                 {
-                    dic[ph][i] = (i>=ph.DayStartHour && i<=ph.DayEndHour) && i>ch;
+                    dic[ph][i] = (i>=ph.DayStartHour && i<=ph.DayEndHour) && (DateTime.Now.DayOfYear<DateSelected.DayOfYear || i>ch);
                 }
             }
 
@@ -124,17 +129,19 @@ namespace PhotoStudio.BLL.ViewModels.Pages.Sub
                 }
             }
 
+            Times.Clear();
             for (int i = 0; i<24; i++)
             {
-                Times[i].IsAvailable = false;
+                var av = false;
                 foreach (var ph in dic.Keys)
                 {
                     if (dic[ph][i] == true)
                     {
-                        Times[i].IsAvailable = true;
+                        av = true;
                         break;
                     }
                 }
+                Times.Add(new ScheduleHour() { IsAvailable = av, Hour = i });
             }
 
             calced = dic;

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <TabControl Grid.Row="0">
-        <TabItem Header="Commands">
+        <TabItem Header="Управление">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -15,23 +15,23 @@
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel Margin="16 16 16 16">
-                    <Button Command="{Binding SaveCommand}" Margin="0 0 0 8">Save Changes</Button>
+                    <Button Command="{Binding SaveCommand}" Margin="0 0 0 8">Сохранить изменения</Button>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Command="{Binding StatisticsCommand}">Get Statistics</Button>
+                        <Button Command="{Binding StatisticsCommand}">Получить статистику</Button>
                         <ComboBox ItemsSource="{Binding Months}"
                                   Grid.Column="1"
                                   SelectedItem="{Binding MonthSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <Button Command="{Binding SignOutCommand}"
-                            Margin="0 8 0 0">Log Out</Button>
+                            Margin="0 8 0 0">Выйти</Button>
                 </StackPanel>
             </Grid>
         </TabItem>
-        <TabItem Header="Orders">
+        <TabItem Header="Заказы">
             <TabControl Grid.Row="0">
                 <TabItem Header="Active">
                     <DataGrid ItemsSource="{Binding ListOrdersActive}"
@@ -43,7 +43,7 @@
                 </TabItem>
             </TabControl>
         </TabItem>
-        <TabItem Header="Photographers">
+        <TabItem Header="Фотографы">
             <StackPanel>
                 <ListBox Margin="16"
                  ItemsSource="{Binding ListPhotographers}"
@@ -123,11 +123,11 @@
                 </Grid>
             </StackPanel>
         </TabItem>
-        <TabItem Header="Users">
+        <TabItem Header="Пользователи">
             <DataGrid ItemsSource="{Binding ListUsers}"
                       CanUserAddRows="False"/>
         </TabItem>
-        <TabItem Header="Persons">
+        <TabItem Header="Физ. Лица">
             <DataGrid ItemsSource="{Binding ListPersons}"
                       CanUserAddRows="False"/>
         </TabItem>

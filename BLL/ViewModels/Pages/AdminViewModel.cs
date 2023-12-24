@@ -23,7 +23,7 @@ namespace PhotoStudio.BLL.ViewModels.Pages
 
         public ObservableCollection<string> Months { get; set; } = new ObservableCollection<string>(new List<string>()
         {
-            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
         });
         public string MonthSelected { get; set; }
 
@@ -94,9 +94,9 @@ namespace PhotoStudio.BLL.ViewModels.Pages
                 {
                     Statistic st = ((OrderRepository)p.db.Orders).GetMonthStatistics(mIndex);
                     string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    using (StreamWriter of = new StreamWriter(Path.Combine(docPath, "PhotoStudioStatistic_"+Months[mIndex]+".txt")))
+                    using (StreamWriter of = new StreamWriter(Path.Combine(docPath, "PhotoStudioStatistic_" + Months[mIndex] + ".csv"), false, Encoding.GetEncoding(1251)))
                     {
-                        of.WriteLine("=== " + Months[mIndex] + " PhotoStudio Report ===");
+                        /*of.WriteLine("=== " + Months[mIndex] + " PhotoStudio Report ===");
                         of.WriteLine(" * Total Revenue\t\t" + st.totalmade.ToString("N0"));
                         of.WriteLine(" * Orders Taken\t\t" + (st.successful + st.failed).ToString("N0"));
                         of.WriteLine(" \t | Completed:\t" + (st.successful).ToString("N0"));
@@ -107,6 +107,18 @@ namespace PhotoStudio.BLL.ViewModels.Pages
                         {
                             of.WriteLine(ph.Surname + " " + ph.Name + " " + ph.Patronym);
                             of.WriteLine("| Earned: " + st.totalmade_photographers[ph].ToString("N0") + " from " + st.successful_photographers[ph].ToString("N0") + " orders;");
+                        }*/
+
+                        of.WriteLine("-, Полная выручка, , Заказов принято, Успешных, Возвращённых");
+                        of.WriteLine("Всего" + ", " + st.totalmade + ", ," + (st.successful + st.failed) + ", " + st.successful + ", " + st.failed);
+                        of.WriteLine(",");
+                        foreach (Photographer ph in st.totalmade_photographers.Keys)
+                        {
+                            of.WriteLine(ph.Surname + " " + ph.Name + " " + ph.Patronym + ", " + st.totalmade_photographers[ph] + ", "
+                                + ", " + (st.successful_photographers[ph] + st.failed_photographers[ph])
+                                + ", " + st.successful_photographers[ph]
+                                + ", " + st.failed_photographers[ph]
+                            );
                         }
                     }
                 }

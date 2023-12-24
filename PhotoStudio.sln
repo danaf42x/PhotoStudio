@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoStudio", "PhotoStudio.csproj", "{AF5D0F5C-FCCA-4BDC-A944-C2739E1BEC55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectLab8", "..\TestProjectLab8\TestProjectLab8.csproj", "{59883715-29E9-469B-A317-4CBE921DDDF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestPhotoStudio", "..\TestProjectLab8\TestPhotoStudio.csproj", "{59883715-29E9-469B-A317-4CBE921DDDF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

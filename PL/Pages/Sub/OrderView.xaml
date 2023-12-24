@@ -9,16 +9,17 @@
     <StackPanel>
         <TextBlock TextAlignment="Center"
                    FontWeight="Bold"
-                   FontSize="32">Make an order!</TextBlock>
+                   Foreground="White"
+                   FontSize="18">Создание заказа</TextBlock>
         <StackPanel Margin="48 8 48 8">
-            <TextBlock>1. Select a date</TextBlock>
+            <TextBlock Foreground="White"  FontWeight="Bold">1. Выберите удобную дату</TextBlock>
             <DatePicker DisplayDateStart="{Binding DisplayDateStart}" 
                         DisplayDateEnd="{Binding DisplayDateEnd}" 
                         SelectedDate="{Binding DateSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock>2. Select time</TextBlock>
+            <TextBlock>2. Выберите час на эту дату</TextBlock>
 
-            <ListBox ItemsSource="{Binding Times}"
-                     Margin="16 4 0 0">
+            <ListBox ItemsSource="{Binding Times, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0 4 0 0" Foreground="White" Background="Transparent">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -43,16 +44,44 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <TextBlock>3. Select a photographer</TextBlock>
+            <TextBlock>3. Выберите одного из свободных фотографов</TextBlock>
             <ComboBox ItemsSource="{Binding ListHour}"
-                      SelectedItem="{Binding SelectedPhotographer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      Visibility="{Binding IsPriceVisible}"
+                      SelectedItem="{Binding SelectedPhotographer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Background="Transparent"
+                      Foreground="Black"  FontWeight="Bold">
+            </ComboBox>
 
-            <Button Margin="32"
-                    Command="{Binding HireCommand}">
-                Make an order!
-            </Button>
+            <Grid Margin="24" Visibility="{Binding IsPriceVisible}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock>This will be 350 roubles.</TextBlock>
+                <Border BorderBrush="LawnGreen"
+                        BorderThickness="2"
+                        Margin="0 0 8 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="16" Margin="12 4 4 4" FontWeight="Bold" Grid.Column="1" 
+                                   Foreground="LawnGreen">350 Р</TextBlock>
+                        <Rectangle Fill="LawnGreen"/>
+                        <TextBlock FontSize="16" Margin="12 4 4 4" FontWeight="Bold" Grid.Column="0" 
+                                   Foreground="Black" HorizontalAlignment="Center">Стоимость</TextBlock>
+                    </Grid>
+                </Border>
+                
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding HireCommand}"
+                    Foreground="PaleTurquoise" BorderBrush="PaleTurquoise" Background="Transparent">
+                    Оформить
+                </Button>
+
+            </Grid>
         </StackPanel>
     </StackPanel>
 </UserControl>

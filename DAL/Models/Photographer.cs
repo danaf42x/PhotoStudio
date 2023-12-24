@@ -40,11 +40,12 @@ namespace PhotoStudio.DAL.Models
                 if (_imgsrc == null)
                 {
                     var converter = new ImageSourceConverter();
-                    if (File.Exists("pack://application:,,,/PL/Images/Employees/" + PhoneNumber + ".jpg"))
+
+                    try
                     {
                         _imgsrc = (ImageSource)converter.ConvertFromString("pack://application:,,,/PL/Images/Employees/" + PhoneNumber + ".jpg");
-                    }
-                    else
+                    } 
+                    catch 
                     {
                         _imgsrc = (ImageSource)converter.ConvertFromString("pack://application:,,,/PL/Images/Employees/Default.jpg");
                     }

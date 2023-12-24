@@ -16,7 +16,7 @@ namespace PhotoStudio.DAL.Other
         public Order Order { get; set; }
         public bool IsActive { get => DateTime.Compare(DateTime.Now, Order.Start) > 0 && DateTime.Compare(DateTime.Now, Order.End) < 0; }
         public Brush TextColor { get => IsActive ? color_yes : color_no; }
-        public string Text { get => IsActive ? "Active" : "Pending"; }
+        public string Text { get => IsActive ? "В процессе" : "В очереди"; }
 
         public PendingOrder(Order order)
         { 

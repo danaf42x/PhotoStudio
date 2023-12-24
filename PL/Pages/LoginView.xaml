@@ -9,20 +9,30 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.35*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <Rectangle Grid.Column="1"
+                   Fill="#28262e"/>
+
         <StackPanel Grid.Column="1"
-                    Margin="0 32 0 32">
-            <Label>Username</Label>
-            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label>Password</Label>
-            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Margin="24 8 24 0"
-                    Command="{Binding SignInCommand}">Sign In</Button>
-            <Button Margin="24 8 24 0"
-                    Command="{Binding SignUpCommand}">Sign Up</Button>
+                    Margin="12 32 12 32">
+            <Image Source="pack://application:,,,/PL/Images/logo.png"/>
+            <Label Foreground="White" FontWeight="Bold">Логин</Label>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Foreground="White" FontWeight="Bold">Пароль</Label>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Background="Transparent" Foreground="White" Margin="24 8 24 0"
+                    Command="{Binding SignInCommand}">Войти</Button>
+
+            <Button Foreground="#44a2c2"
+                    BorderBrush="Transparent" 
+                    Background="Transparent"
+                    Margin="24 8 24 0"
+                    FontStyle="Italic"
+                    FontWeight="Bold"
+                    Command="{Binding SignUpCommand}">Зарегистрироваться</Button>
         </StackPanel>
     </Grid>
 </UserControl>

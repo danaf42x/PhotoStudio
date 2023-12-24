@@ -24,7 +24,7 @@ namespace PhotoStudio.BLL.ViewModels.Pages
             SignInCommand = new ViewModelCommand(
             o => {
                 p.TryLogInAs(Username, Password);
-            }, o => (_username.Length > 2) && (_password.Length > 3) );
+            }, o => (_username.Length > 2) && (_password.Length > 2) );
 
             SignUpCommand = new ViewModelCommand(
             o => {

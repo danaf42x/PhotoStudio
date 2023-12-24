@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,28 +18,29 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="1"
-                    Margin="16 16 16 16">
-            <TextBlock>Username</TextBlock>
-            <TextBox Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock>Password</TextBlock>
-            <TextBox Text="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock>Email</TextBlock>
-            <TextBox Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock>Phone</TextBlock>
-            <TextBox Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock>Passport</TextBlock>
-            <TextBox Text="{Binding Path=Passport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock>Full legal name</TextBlock>
-            <TextBox Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Text="{Binding Path=Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Text="{Binding Path=Patronym, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    Margin="0 16 0 16">
+            <TextBlock FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Background="Transparent" Margin="0 0 0 8" Foreground="White">Регистрация</TextBlock>
+            <TextBlock FontWeight="Bold" Background="Transparent" Foreground="White">Логин</TextBlock>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock FontWeight="Bold" Background="Transparent" Foreground="White">Пароль</TextBlock>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock FontWeight="Bold" Background="Transparent" Foreground="White">Эл. Почта</TextBlock>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock FontWeight="Bold" Background="Transparent" Foreground="White">Номер телефона</TextBlock>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock FontWeight="Bold" Background="Transparent" Foreground="White">Паспорт</TextBlock>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Path=Passport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock FontWeight="Bold" Background="Transparent" Foreground="White">Имя, фамилия, отчество</TextBlock>
+            <TextBox Background="Transparent" Foreground="White" Margin="0 0 0 8" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Background="Transparent" Foreground="White" Margin="0 0 0 8" Text="{Binding Path=Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Background="Transparent" Foreground="White" Text="{Binding Path=Patronym, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
-                    Margin="4 4 4 4">
-            <Button Command="{Binding SignUpCommand}">Sign Up</Button>
-            <Button Command="{Binding CancelCommand}" Margin="0 8 0 8"> Cancel</Button>
+                    Margin="24 4 24 4">
+            <Button Background="Transparent" Foreground="White"  Command="{Binding SignUpCommand}">Зарегистрироваться</Button>
+            <Button Background="Transparent" Foreground="White" Command="{Binding CancelCommand}" Margin="0 8 0 8">Отмена</Button>
         </StackPanel>
     </Grid>
 </UserControl>
